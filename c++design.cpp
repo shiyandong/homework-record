@@ -5,16 +5,16 @@
 #include<windows.h>
 #define endl "\n"
 using namespace std;
-const int N = 20;          //µØÍ¼ ´óĞ¡  ÔÚ100ÒÔÄÚÊ±Ğ§¹û½ÏºÃ
+const int N = 20;          //åœ°å›¾ å¤§å°  åœ¨100ä»¥å†…æ—¶æ•ˆæœè¾ƒå¥½
 const int N1 = N * N;
-const int b = 30;             //Í¼ĞÎ´óĞ¡
+const int b = 30;             //å›¾å½¢å¤§å°
 const int dx[4] = { -1,1,0,0 }, dy[4] = { 0,0,-1,1 };
 const double reward = 1e10;
 
 class Natu_env {
 private:
-    int wind_v[N][N];   //·ç¿¼ÂÇ2Î¬
-    int wind_d[N][N];     //  0,1,2,3  ÉÏ±±ÏÂÄÏ×óÎ÷ÓÒ¶«
+    int wind_v[N][N];   //é£è€ƒè™‘2ç»´
+    int wind_d[N][N];     //  0,1,2,3  ä¸ŠåŒ—ä¸‹å—å·¦è¥¿å³ä¸œ
     int temperature;
 public:
     void init_nat() {
@@ -58,8 +58,8 @@ public:
 
 class  Obstacle {
 private:
-    int  obs[N][N];     //Êı×Ö´óĞ¡´ú±í¸ß¶È£¬ÈıÎ¬Ê±
-    bool flag[N][N];   //ÓÃÓÚ¼ì²éµØÍ¼µÄ¿É´ïĞÔ
+    int  obs[N][N];     //æ•°å­—å¤§å°ä»£è¡¨é«˜åº¦ï¼Œä¸‰ç»´æ—¶
+    bool flag[N][N];   //ç”¨äºæ£€æŸ¥åœ°å›¾çš„å¯è¾¾æ€§
     bool legal = false;
  
 public:
@@ -132,9 +132,9 @@ public:
     }
 };
 
-class Env :public Natu_env, public Obstacle {       //×Ü»·¾³  ¼Ì³Ğ
+class Env :public Natu_env, public Obstacle {       //æ€»ç¯å¢ƒ  ç»§æ‰¿
 public:
-    Env() {                  //¹¹Ôìº¯Êı
+    Env() {                  //æ„é€ å‡½æ•°
         init_obs();
         init_nat();
 
@@ -202,7 +202,7 @@ public:
 
     void print_q() {
         cout << endl;
-        cout << "QÖµ±í¸üĞÂ¹ı³ÌÎª" << endl;
+        cout << "Qå€¼è¡¨æ›´æ–°è¿‡ç¨‹ä¸º" << endl;
         for (int i = 0; i < N1; i++) {
             cout << i << "###   ";
             for (int j = 0; j < 4; j++) {
@@ -272,8 +272,8 @@ public:
 
 					next_state_max_q = M(q[next_state]);
 
-					// µ±Ç°¶¯×÷µÄ¾­Ñé×ÜµÃ·Ö = µ±Ç°¶¯×÷µÃ·Ö + ¦Ã X Ö´ĞĞ¸Ã¶¯×÷ºóµÄÏÂÒ»¸ö×´Ì¬µÄ×î´óµÄ¾­ÑéµÃ·Ö
-					// ¼´£º»ıÀÛ¾­Ñé = ¶¯×÷Ö´ĞĞºóµÄ¼´Ê±½±Àø + ÏÂÒ»×´Ì¬¸ù¾İÏÖÓĞÑ§Ï°¾­ÑéÖĞ×îÓĞ¼ÛÖµµÄÑ¡Ôñ X ÕÛ¿ÛÂÊ
+					// å½“å‰åŠ¨ä½œçš„ç»éªŒæ€»å¾—åˆ† = å½“å‰åŠ¨ä½œå¾—åˆ† + Î³ X æ‰§è¡Œè¯¥åŠ¨ä½œåçš„ä¸‹ä¸€ä¸ªçŠ¶æ€çš„æœ€å¤§çš„ç»éªŒå¾—åˆ†
+					// å³ï¼šç§¯ç´¯ç»éªŒ = åŠ¨ä½œæ‰§è¡Œåçš„å³æ—¶å¥–åŠ± + ä¸‹ä¸€çŠ¶æ€æ ¹æ®ç°æœ‰å­¦ä¹ ç»éªŒä¸­æœ€æœ‰ä»·å€¼çš„é€‰æ‹© X æŠ˜æ‰£ç‡
 					q[current_state][current_action] = current_action_point + gamma * next_state_max_q;
 					current_state = next_state;
                     
@@ -318,7 +318,7 @@ public:
 
             /*
             int x = current_state / N, y = current_state % N;
-            cout << "´Ó£º " << x<<","<<y << "  ×ßµ½ÁË:  ";
+            cout << "ä»ï¼š " << x<<","<<y << "  èµ°åˆ°äº†:  ";
 
             current_state += dx[current_action] * N + dy[current_action];
 
